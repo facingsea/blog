@@ -1,295 +1,54 @@
-<!DOCTYPE html>
-<html >
-<head>
-  
-    <!--[if lt IE 9]>
-        <style>body {display: none; background: none !important} </style>
-        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
-    <![endif]-->
-
-  <meta charset="utf-8">
-  
-  <title>(转)Hexo插件安装 | Zhi Feng</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Hexo插件安装">
-<meta property="og:type" content="article">
-<meta property="og:title" content="(转)Hexo插件安装">
-<meta property="og:url" content="http://facingsea.com/2015/12/27/Hexo-plug/index.html">
-<meta property="og:site_name" content="Zhi Feng">
-<meta property="og:description" content="Hexo插件安装">
-<meta property="og:updated_time" content="2016-05-08T04:48:40.817Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="(转)Hexo插件安装">
-<meta name="twitter:description" content="Hexo插件安装">
-  
-    <link rel="alternative" href="/atom.xml" title="Zhi Feng" type="application/atom+xml">
+<?xml version="1.0" encoding="utf-8"?>
+<search>
   
   
-    <link rel="icon" href="/favicon.png">
-  
-  
-      <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
-  
-  
-      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-      <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  
-  
-      <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
-  
-  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-  <script>
-      var yiliaConfig = {
-          fancybox: true,
-          animate: true,
-          isHome: false,
-          isPost: true,
-          isArchive: false,
-          isTag: false,
-          isCategory: false,
-          open_in_new: false,
-          fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
-          scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-          search: true
-      }
-  </script>
-
-  
-      <script>
-          yiliaConfig.jquery_ui = [false];
-      </script>
-  
-
-  
-
-        <link href="//cdn.bootcss.com/layer/2.3/skin/layer.css" rel="stylesheet">
-        <script src="//cdn.bootcss.com/layer/2.3/layer.js"></script>
-        <!--
-        yiliaConfig.layer_tip = [true, "//cdn.bootcss.com/layer/2.3/layer.js", "//cdn.bootcss.com/layer/2.3/skin/layer.css"];
-        -->
-  
-
-  
-      <script>
-          yiliaConfig.rootUrl = "/";
-      </script>
-  
-
-  
-  
-</head>
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            <img src="/img/avatar.png" class="animated zoomIn">
-        </a>
-        <hgroup>
-          <h1 class="header-author"><a href="/">Zhi Feng</a></h1>
-        </hgroup>
-
-        
-
-        
-            <form id="search-form">
-            <input type="text" id="local-search-input" name="q" results="0" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
-            <i class="fa fa-times" onclick="resetSearch()"></i>
-            </form>
-            <div id="local-search-result"></div>
-            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
-        
-
-
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        
-                        <li>关于我</li>
-                        
-                    </ul>
-                </div>
-            </div>
-        
-
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="/">主页</a></li>
-                        
-                            <li><a href="/archives/">所有文章</a></li>
-                        
-                            <li><a href="/tags/">标签云</a></li>
-                        
-                            <li><a href="/about/">关于我</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa Email" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=Jx4QFREeEhQQFmdWVglESEo" title="Email"></a>
-                            
-                                <a class="fa GitHub" target="_blank" href="https://github.com/facingsea" title="GitHub"></a>
-                            
-                                <a class="fa Facebook" target="_blank" href="https://www.facebook.com/wangzhf" title="Facebook"></a>
-                            
-                                <a class="fa Twitter" target="_blank" href="https://twitter.com/facingseas" title="Twitter"></a>
-                            
-                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mobile/">Mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spfk/">spfk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中文/">中文</a></li></ul>
-                    </div>
-                </section>
-                
-                
-                
-
-                
-                
-                <section class="switch-part switch-part3">
-                
-                    <div id="js-aboutme">面朝大海，春暖花开</div>
-                </section>
-                
-            </div>
-        </div>
-    </header>                
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Zhi Feng</a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                <img src="/img/avatar.png" class="animated zoomIn">
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">Zhi Feng</a></h1>
-            </hgroup>
-            
-            <nav class="header-menu">
-                <ul>
-                
-                    <li><a href="/">主页</a></li>
-                
-                    <li><a href="/archives/">所有文章</a></li>
-                
-                    <li><a href="/tags/">标签云</a></li>
-                
-                    <li><a href="/about/">关于我</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa Email" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=Jx4QFREeEhQQFmdWVglESEo" title="Email"></a>
-                            
-                                <a class="fa GitHub" target="_blank" href="https://github.com/facingsea" title="GitHub"></a>
-                            
-                                <a class="fa Facebook" target="_blank" href="https://www.facebook.com/wangzhf" title="Facebook"></a>
-                            
-                                <a class="fa Twitter" target="_blank" href="https://twitter.com/facingseas" title="Twitter"></a>
-                            
-                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
-                            
-                        </ul>
-            </nav>
-        </header>                
-    </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
-</nav>
-      <div class="body-wrap"><article id="post-Hexo-plug" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/27/Hexo-plug/" class="article-date">
-      <time datetime="2015-12-27T10:29:00.000Z" itemprop="datePublished">2015-12-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+    <entry>
+      <title><![CDATA[实现replaceAll]]></title>
+      <url>http://facingsea.com/2016/05/23/js-replace-all/</url>
+      <content type="html"><![CDATA[<p>js中提供了replace方法在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringObject.replace(regexp/substr,replacement)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>regexp/substr 为子字符串或正则表达式</p>
+</blockquote>
+<p>通过使用正则表达式来达到replaceAll的效果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">String</span>.prototype.replaceAll = <span class="function"><span class="keyword">function</span>(<span class="params">AFindText,ARepText</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> raRegExp = <span class="keyword">new</span> <span class="built_in">RegExp</span>(AFindText.replace(<span class="regexp">/([\(\)\[\]\&#123;\&#125;\^\$\+\-\*\?\.\"\'\|\/\\])/g</span>,<span class="string">"\\$1"</span>),<span class="string">"ig"</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>.replace(raRegExp,ARepText);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+    </entry>
     
+    <entry>
+      <title><![CDATA[针对SPFK主题修改记录]]></title>
+      <url>http://facingsea.com/2016/05/08/modify-spfk-record/</url>
+      <content type="html"><![CDATA[<h2 id="左侧社交信息展示"><a href="#左侧社交信息展示" class="headerlink" title="左侧社交信息展示"></a>左侧社交信息展示</h2><p>默认情况下，最后一个图标有一个margin-right的设置，设置在： ..source/css/_partial/main.styl中<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">a</span>:last-of-type &#123;</span><br><span class="line">    <span class="attribute">margin-right</span>:<span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>将该设置去掉即可。</p>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><p>标签中的部分字体显示会向下偏一些，设置在：source/css/_partial/tagcloud.styl中<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tagcloud</span>&#123;</span><br><span class="line">    <span class="selector-tag">a</span>&#123;</span><br><span class="line">        <span class="attribute">display</span>:inline-block;  </span><br><span class="line">        <span class="attribute">text-decoration</span>:none;  </span><br><span class="line">        <span class="attribute">font-weight</span>: normal;</span><br><span class="line">        <span class="attribute">font-size</span>:<span class="number">10px</span>;  </span><br><span class="line">        <span class="attribute">color</span>:<span class="number">#fff</span>;   </span><br><span class="line">        <span class="attribute">height</span>:<span class="number">18px</span>;  </span><br><span class="line">        <span class="attribute">line-height</span>:<span class="number">18px</span>;  </span><br><span class="line">        <span class="attribute">float</span>: left;</span><br><span class="line">        <span class="attribute">padding</span>:<span class="number">0</span> <span class="number">5px</span> <span class="number">0px</span> <span class="number">10px</span>;  </span><br><span class="line">        <span class="attribute">position</span>:relative;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>将line-height属性值设置为16px，效果稍好一些。</p>
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><blockquote>
+<p>鼠标移动到左侧的icon上显示tip-box时，很大情况下会出现鼠标还没移动到tip-box上就消失的问题。</p>
+</blockquote>
+]]></content>
+    </entry>
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      (转)Hexo插件安装
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-    </div>
-
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
+    <entry>
+      <title><![CDATA[themes-test]]></title>
+      <url>http://facingsea.com/2016/05/08/themes-test/</url>
+      <content type="html"><![CDATA[<h2 id="ActionScript"><a href="#ActionScript" class="headerlink" title="ActionScript"></a>ActionScript</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">package</span> <span class="title">org</span>.<span class="title">example</span>.<span class="title">dummy</span> &#123;</span></span><br><span class="line">    <span class="meta"><span class="meta-keyword">import</span> org.dummy.*;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*define package inline interface*/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IFooBarzable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(<span class="rest_arg">... pairs</span>)</span>:Array</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooBar</span> <span class="keyword">implements</span> <span class="title">IFooBarzable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">private</span> <span class="keyword">var</span> cnt:uint = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">var</span> bar:String;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//constructor</span></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">TestBar</span><span class="params">(bar:String)</span>:void </span>&#123;</span><br><span class="line">            bar = bar;</span><br><span class="line">            ++cnt;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(<span class="rest_arg">... pairs</span>)</span>:Array </span>&#123;</span><br><span class="line">            pairs.push(bar);</span><br><span class="line">            <span class="keyword">return</span> pairs;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+    </entry>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>　　<strong>自用笔记：</strong>本文属于自用笔记，不做详解，仅供参考。在此记录自己已理解并开始遵循的前端代码规范。What How Why<br>　　最近，使用Hexo遇到了很多问题，在设立进行整理。</p>
+    <entry>
+      <title><![CDATA[test]]></title>
+      <url>http://facingsea.com/2016/05/07/test/</url>
+      <content type="html"><![CDATA[<h2 id="新文章"><a href="#新文章" class="headerlink" title="新文章"></a>新文章</h2><h3 id="标题1"><a href="#标题1" class="headerlink" title="标题1"></a>标题1</h3><pre><code>Hello world!
+</code></pre><h3 id="标题2"><a href="#标题2" class="headerlink" title="标题2"></a>标题2</h3><pre><code>hello world
+</code></pre><h3 id="脚本测试"><a href="#脚本测试" class="headerlink" title="脚本测试"></a>脚本测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"hello world"</span></span><br><span class="line">ps -ef | grep java</span><br></pre></td></tr></table></figure>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[(转)Hexo插件安装]]></title>
+      <url>http://facingsea.com/2015/12/27/Hexo-plug/</url>
+      <content type="html"><![CDATA[<p>　　<strong>自用笔记：</strong>本文属于自用笔记，不做详解，仅供参考。在此记录自己已理解并开始遵循的前端代码规范。What How Why<br>　　最近，使用Hexo遇到了很多问题，在设立进行整理。</p>
 <a id="more"></a>
 <h2 id="同步instagram图片"><a href="#同步instagram图片" class="headerlink" title="同步instagram图片"></a>同步instagram图片</h2><blockquote>
 <p>新建页面</p>
@@ -436,255 +195,9 @@
 <blockquote>
 <p>转自： <a href="&quot;http://luuman.github.io/2015/12/27/Hexo-plug/&quot;">luuman</a></p>
 </blockquote>
-
-      
-    </div>
+]]></content>
+    </entry>
     
-  </div>
   
-    
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2015/12/27/Hexo-plug/">(转)Hexo插件安装</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">Zhi Feng</a></p>
-        <p><span>发布时间:</span>2015-12-27, 18:29:00</p>
-        <p><span>最后更新:</span>2016-05-08, 12:48:40</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2015/12/27/Hexo-plug/" title="(转)Hexo插件安装">http://facingsea.com/2015/12/27/Hexo-plug/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://facingsea.com/2015/12/27/Hexo-plug/　　作者: Zhi Feng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
-        </p>
-    </div>
-
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/05/07/test/">
-                    test
-                </a>
-            </div>
-        
-        
-    </nav>
-
   
-</article>
-
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#同步instagram图片"><span class="toc-number">1.</span> <span class="toc-text">同步instagram图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分享按钮"><span class="toc-number">2.</span> <span class="toc-text">分享按钮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#百度统计"><span class="toc-number">3.</span> <span class="toc-text">百度统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不蒜子"><span class="toc-number">4.</span> <span class="toc-text">不蒜子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#版权声明"><span class="toc-number">5.</span> <span class="toc-text">版权声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#社交账号图标修改"><span class="toc-number">6.</span> <span class="toc-text">社交账号图标修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#站内搜索框"><span class="toc-number">7.</span> <span class="toc-text">站内搜索框</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#站点Swiftype搜索框"><span class="toc-number">8.</span> <span class="toc-text">站点Swiftype搜索框</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RSS不显示"><span class="toc-number">9.</span> <span class="toc-text">RSS不显示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sitemap网站地图"><span class="toc-number">10.</span> <span class="toc-text">sitemap网站地图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多说评论插件"><span class="toc-number">11.</span> <span class="toc-text">多说评论插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为Hexo博客添加目录"><span class="toc-number">12.</span> <span class="toc-text">为Hexo博客添加目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入自定义页面"><span class="toc-number">13.</span> <span class="toc-text">插入自定义页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义挂件"><span class="toc-number">14.</span> <span class="toc-text">自定义挂件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo语法高亮"><span class="toc-number">15.</span> <span class="toc-text">Hexo语法高亮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#首页添加loading效果"><span class="toc-number">16.</span> <span class="toc-text">首页添加loading效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LoadingBar页面顶部加载进度条"><span class="toc-number">17.</span> <span class="toc-text">LoadingBar页面顶部加载进度条</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#highlight-js"><span class="toc-number">18.</span> <span class="toc-text">highlight.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo插件"><span class="toc-number">19.</span> <span class="toc-text">Hexo插件</span></a></li></ol>
-</div>
-<style>
-    .left-col .switch-btn {
-        display: none;
-    }
-    .left-col .switch-area {
-        display: none;
-    }
-</style>
-
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-<script>
-    var valueHide = "隐藏目录";
-    var valueShow = "显示目录";
-
-    if ($(".left-col").is(":hidden")) {
-        $("#tocButton").attr("value", valueShow);
-    }
-
-    $("#tocButton").click(function() {
-        if ($("#toc").is(":hidden")) {
-            $("#tocButton").attr("value", valueHide);
-            $("#toc").slideDown(320);
-            $(".switch-btn, .switch-area").fadeOut(300);
-        }
-        else {
-            $("#tocButton").attr("value", valueShow);
-            $("#toc").slideUp(350);
-            $(".switch-btn, .switch-area").fadeIn(500);
-        }
-    })
-
-    if ($(".toc").length < 1) {
-        $("#toc, #tocButton").hide();
-        $(".switch-btn, .switch-area").show();
-    }
-</script>
-
-
-
-
-
-    
-<div class="share">
-    
-        <div class="bdsharebuttonbox">
-            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
-            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
-            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
-        </div>
-        <script>
-            window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"(转)Hexo插件安装　| Zhi Feng　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-        </script>
-    
-
-    
-</div>
-
-
-
-
-
-
-
-    
-      <div class="duoshuo" id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2015/12/27/Hexo-plug/" data-title="(转)Hexo插件安装" data-url="http://facingsea.com/2015/12/27/Hexo-plug/"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:"facingsea"};
-    (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0] 
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-    </script>
-    <!-- 多说公共JS代码 end -->
-</div>
-
-    
-
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2016/05/07/test/" title="上一篇: test">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/05/23/js-replace-all/">实现replaceAll</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/08/modify-spfk-record/">针对SPFK主题修改记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/08/themes-test/">themes-test</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/test/">test</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/Hexo-plug/">(转)Hexo插件安装</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
-</div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                <i class="fa fa-copyright"></i> 
-                2016 Zhi Feng
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
-            </div>
-        </div>
-        
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >本站到访数: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>, </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">本页阅读量: 
-                            <span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
-        
-    </div>
-</footer>
-    </div>
-    
-<script language="javascript">
-    window.onload = function() {
-        $("[title]").each(function() {
-            layerTip(this);
-        });
-        $("#scroll").each(function() {
-            layerTip(this);
-        });
-        $("#tocButton, #comments").each(function() {
-            layerTip(this);
-        });
-        $("#post-nav-button").each(function() {
-            layerTip(this);
-        });
-        $(".social").each(function() {
-            layerTip(this);
-        });
-
-        function layerTip(ele){
-            var $ele = $(ele);
-            var title = $ele.attr('title');
-            if (title == undefined || title == "") return;
-            var layerIndex = -1;
-            $ele.data('title', title).removeAttr('title').hover(
-                function() {
-                    $ele.attr('title', '');
-                    layerIndex = layer.tips($ele.data('title'), ele, {
-                        tips: 3
-                    });
-                }, function() {
-                    $ele.attr('title', title);
-                    if(layerIndex != -1){
-                        layer.close(layerIndex);
-                    }
-                });
-        }
-    };
-</script>
-
-
-
-
-<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
-
-
-
-
-<div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
-</div>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-
-  </div>
-</body>
-</html>
+</search>

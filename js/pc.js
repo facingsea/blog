@@ -91,20 +91,26 @@ define([], function(){
         if(yiliaConfig.isPost) {
             $(".post-list").addClass("toc-article");
             $(".post-list-item a").attr("target","_blank");
-            $("#post-nav-button > a:nth-child(2)").click(function() {
+            $("#post-nav-button > a:nth-child(3)").click(function() {
                 $("#post-nav-button .fa-bars,#post-nav-button .fa-times").toggle();
                 $(".post-list").toggle(300);
                 if ($(".toc").length > 0) {
                     $("#toc, #tocButton").toggle(200, function() {
                         if ($(".switch-area").is(":visible")) {
                             $("#toc, .switch-btn, .switch-area").toggle();
-                            $("#tocButton").attr("value", valueHide);
+                            $("#tocButton").attr("value", yiliaConfig.toc[0]);
                             }
                         });
                 }
                 else {
                     $(".switch-btn, .switch-area").fadeToggle(300);
                 }
+            });
+            //目录
+            $("#post-nav-button > a:nth-child(2)").click(function() {
+                $("#post-nav-button .fa-list-ol,#post-nav-button .fa-times").toggle();
+                //$(".post-list").toggle(300);
+                console.log("show table content.");
             });
         }
     }()

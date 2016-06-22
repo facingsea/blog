@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Facingsea" />
+
+
+
+<meta name="description" content="百度webuploader使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度webuploader使用">
+<meta property="og:url" content="http://facingsea.com/2015/12/04/fe-webuploader-useage/index.html">
+<meta property="og:site_name" content="Facingsea">
+<meta property="og:description" content="百度webuploader使用">
+<meta property="og:updated_time" content="2016-06-22T07:51:10.986Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="百度webuploader使用">
+<meta name="twitter:description" content="百度webuploader使用">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternative" href="/atom.xml" title="Facingsea" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>百度webuploader使用 | Facingsea</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <link href="//cdn.bootcss.com/layer/2.3/skin/layer.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/layer/2.3/layer.js"></script>
+    <!--
+    yiliaConfig.layer_tip = [true, "//cdn.bootcss.com/layer/2.3/layer.js", "//cdn.bootcss.com/layer/2.3/skin/layer.css"];
+    -->
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Facingsea</a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" results="0" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=Jx4QFREeEhQQFmdWVglESEo" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/facingsea" title="GitHub"></a>
+                            
+                                <a class="fa Facebook" target="_blank" href="https://www.facebook.com/wangzhf" title="Facebook"></a>
+                            
+                                <a class="fa Twitter" target="_blank" href="https://twitter.com/facingseas" title="Twitter"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/adblock/">adblock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrency/">concurrency</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webuploader/">webuploader</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">面朝大海，春暖花开</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Facingsea</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Facingsea</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=Jx4QFREeEhQQFmdWVglESEo" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/facingsea" title="GitHub"></a>
+                            
+                                <a class="fa Facebook" target="_blank" href="https://www.facebook.com/wangzhf" title="Facebook"></a>
+                            
+                                <a class="fa Twitter" target="_blank" href="https://twitter.com/facingseas" title="Twitter"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-fe-webuploader-useage" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/04/fe-webuploader-useage/" class="article-date">
+      <time datetime="2015-12-04T10:24:33.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      百度webuploader使用
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/webuploader/">webuploader</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webuploader/">webuploader</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <pre><code>使用版本：0.1.6
+</code></pre><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>在初始化时可通过<code>WebUploader.create({...})</code>的形式创建，如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> uploader = <span class="literal">null</span>, </span><br><span class="line">uploader = WebUploader.create(&#123;</span><br><span class="line">    <span class="comment">// 文件接收服务端。</span></span><br><span class="line">    server: <span class="string">"https://****.do"</span></span><br><span class="line">    <span class="comment">// 选择文件的按钮。可选。</span></span><br><span class="line">    <span class="comment">// 内部根据当前运行是创建，可能是input元素，也可能是flash.</span></span><br><span class="line">    <span class="comment">//, pick: '#fileSelectBtn'</span></span><br><span class="line">    , pick: &#123;</span><br><span class="line">        id: <span class="string">"#fileSelectBtn"</span>  <span class="comment">// 指定选择文件的按钮容器，不指定则不创建按钮</span></span><br><span class="line">        <span class="comment">//, innerHTML: "按钮1"</span></span><br><span class="line">        , button: <span class="string">'&lt;div style="width: 112px; height: 30px;"&gt;&lt;/div&gt;'</span></span><br><span class="line">        , style: <span class="string">''</span> </span><br><span class="line">        , multiple: <span class="literal">false</span> <span class="comment">// 是否开起同时选择多个文件能力</span></span><br><span class="line">    &#125;</span><br><span class="line">    , threads: <span class="number">2</span>  <span class="comment">// [可选] [默认值：3] 上传并发数。允许同时最大上传进程数。</span></span><br><span class="line">    , fileNumLimit: <span class="number">2</span>  <span class="comment">// [可选] [默认值：undefined] 验证文件总数量, 超出则不允许加入队列。</span></span><br><span class="line">    , duplicate: <span class="literal">false</span>  <span class="comment">// &#123;Boolean&#125; true：可以重复，false：不允许重复 [可选] [默认值：undefined] 去重， 根据文件名字、文件大小和最后修改时间来生成hash Key.</span></span><br><span class="line">    , auto: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>如果需要添加多个按钮，可通过<code>uploader.addButton({...});</code>，如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">uploader.addButton(&#123;</span><br><span class="line">    id: <span class="string">'#fileSelectBtn02'</span></span><br><span class="line">    , button: <span class="string">'&lt;div style="width: 112px; height: 30px;"&gt;&lt;/div&gt;'</span></span><br><span class="line">    , style: <span class="string">''</span> </span><br><span class="line">    , multiple: <span class="literal">false</span>    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><h3 id="文件被加入队列之前"><a href="#文件被加入队列之前" class="headerlink" title="文件被加入队列之前"></a>文件被加入队列之前</h3><p>当文件被加入队列之前会触发<code>beforeFileQueued</code>事件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">uploader.on(<span class="string">"beforeFileQueued"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(file);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>回调中的参数file为上传的文件对象，可以通过这个file对象检查该文件是否合法。如果该回调返回值为false，则此文件不会被添加进入队列。</p>
+<h3 id="一批文件添加进队列以后"><a href="#一批文件添加进队列以后" class="headerlink" title="一批文件添加进队列以后"></a>一批文件添加进队列以后</h3><p>当一批文件添加进队列以后会触发<code>filesQueued</code>事件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uploader.on(<span class="string">"filesQueued"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//console.log(file.length);</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="当有文件添加到队列时"><a href="#当有文件添加到队列时" class="headerlink" title="当有文件添加到队列时"></a>当有文件添加到队列时</h3><p>当有文件添加进来的时候会触发<code>fileQueued</code>事件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uploader.on( <span class="string">"fileQueued"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> file </span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取文件信息，构建界面</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>可以在该回调中根据file的信息构建界面。</p>
+<h3 id="文件被移除队列"><a href="#文件被移除队列" class="headerlink" title="文件被移除队列"></a>文件被移除队列</h3><p>当文件被移除队列后触发<code>fileDequeued</code>事件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uploader.on(<span class="string">"fileDequeued"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"file "</span>+file.name+<span class="string">" is removed."</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="文件上传过程中进度"><a href="#文件上传过程中进度" class="headerlink" title="文件上传过程中进度"></a>文件上传过程中进度</h3><p>文件上传过程中创建进度事件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">uploader.on( <span class="string">"uploadProgress"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> file, percentage </span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> item = $(<span class="string">"#"</span> + file.id),</span><br><span class="line">        msg = item.find(<span class="string">".uploader-msg"</span>),</span><br><span class="line">        percent = item.find(<span class="string">".uploader-progress-bar"</span>);</span><br><span class="line">    <span class="keyword">var</span> val = <span class="built_in">parseInt</span>(percentage * <span class="number">100</span>);</span><br><span class="line">    <span class="keyword">var</span> per = val + <span class="string">"%"</span>;</span><br><span class="line">    msg.text(<span class="string">" - "</span> + per);</span><br><span class="line">    percent.css(<span class="string">"background"</span>, <span class="string">"#1daeeb"</span>);</span><br><span class="line">    percent.css( <span class="string">"width"</span>, per );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<pre><code>file: File对象
+percentage: 上传进度，数值
+</code></pre><h3 id="文件上传成功"><a href="#文件上传成功" class="headerlink" title="文件上传成功"></a>文件上传成功</h3><p>当文件上传成功时会触发<code>uploadSuccess</code>事件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uploader.on( <span class="string">"uploadSuccess"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> file, response </span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(file);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<pre><code>response: 服务端返回的数据，Object对象
+</code></pre><h3 id="处理后端返回错误信息"><a href="#处理后端返回错误信息" class="headerlink" title="处理后端返回错误信息"></a>处理后端返回错误信息</h3><p>当后台校验文件后，需要将特定的信息传到前台并显示，需要结合<code>uploadAccept</code>和<code>uploadError</code>两个事件一起用：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">uploader.on(<span class="string">"uploadAccept"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">obj, response, fn</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(response.error != <span class="literal">undefined</span> )&#123;</span><br><span class="line">        <span class="keyword">if</span>(response.error)&#123; <span class="comment">//只有失败的时候才将信息往下传</span></span><br><span class="line">            fn(response);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">uploader.on( <span class="string">"uploadError"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> file, reason  </span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(reason.error != <span class="literal">undefined</span> )&#123;</span><br><span class="line">        <span class="keyword">if</span>(reason.error)&#123;</span><br><span class="line">            <span class="comment">// 上传失败</span></span><br><span class="line">            <span class="comment">// 处理逻辑</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>当某个文件上传到服务端响应后，会派送<code>uploadAccept</code>事件来询问服务端响应是否有效。<code>response</code>为服务端的返回数据，json格式，如果服务端不是json格式，从ret._raw中取数据，自行解析。<code>fn</code>为回调，定义见webuploader.js中4038，在4043行触发<code>uploadAccept</code>事件时，将<code>fn</code>传到了自己定义的<code>uploader.on(&quot;uploadAccept&quot;, function(..., fn){})</code>。</p>
+<h3 id="error事件"><a href="#error事件" class="headerlink" title="error事件"></a>error事件</h3><p><code>error</code>事件只是前台校验失败的显示信息。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">uploader.on(<span class="string">"error"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">type</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"error"</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(type);</span><br><span class="line">    <span class="keyword">if</span>(type == <span class="string">'Q_EXCEED_NUM_LIMIT'</span>)&#123;</span><br><span class="line">        top.showMsg(<span class="number">3</span>, <span class="string">'文件上传数超出限制！'</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> (type == <span class="string">'Q_EXCEED_SIZE_LIMIT'</span>)&#123;</span><br><span class="line">        top.showMsg(<span class="number">3</span>, <span class="string">'文件大小超出限制！'</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> (type == <span class="string">'Q_TYPE_DENIED'</span>)&#123;</span><br><span class="line">        top.showMsg(<span class="number">3</span>, <span class="string">'非法文件类型！'</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> (type == <span class="string">'F_DUPLICATE'</span>)&#123;</span><br><span class="line">        top.showMsg(<span class="number">3</span>, <span class="string">'文件已存在！'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>WebUploader：<a href="http://fex.baidu.com/webuploader/doc/index.html#WebUploader_Uploader" target="_blank" rel="external">http://fex.baidu.com/webuploader/doc/index.html#WebUploader_Uploader</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/12/04/fe-webuploader-useage/">百度webuploader使用</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Facingsea</a></p>
+        <p><span>发布时间:</span>2015-12-04, 18:24:33</p>
+        <p><span>最后更新:</span>2016-06-22, 15:51:10</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/12/04/fe-webuploader-useage/" title="百度webuploader使用">http://facingsea.com/2015/12/04/fe-webuploader-useage/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://facingsea.com/2015/12/04/fe-webuploader-useage/　　作者: Facingsea" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/12/23/ubuntu-modify-boot-background-image/">
+                    更改Ubuntu引导界面背景
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/11/24/mysql-create-database-and-user/">
+                    mysql创建库及分配用户
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化"><span class="toc-number">1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件"><span class="toc-number">2.</span> <span class="toc-text">事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件被加入队列之前"><span class="toc-number">2.1.</span> <span class="toc-text">文件被加入队列之前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一批文件添加进队列以后"><span class="toc-number">2.2.</span> <span class="toc-text">一批文件添加进队列以后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#当有文件添加到队列时"><span class="toc-number">2.3.</span> <span class="toc-text">当有文件添加到队列时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件被移除队列"><span class="toc-number">2.4.</span> <span class="toc-text">文件被移除队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件上传过程中进度"><span class="toc-number">2.5.</span> <span class="toc-text">文件上传过程中进度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件上传成功"><span class="toc-number">2.6.</span> <span class="toc-text">文件上传成功</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理后端返回错误信息"><span class="toc-number">2.7.</span> <span class="toc-text">处理后端返回错误信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#error事件"><span class="toc-number">2.8.</span> <span class="toc-text">error事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script>
+    yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+</script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"百度webuploader使用　| Facingsea　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" data-thread-key="2015/12/04/fe-webuploader-useage/" data-title="百度webuploader使用" data-url="http://facingsea.com/2015/12/04/fe-webuploader-useage/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"facingsea"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/12/23/ubuntu-modify-boot-background-image/" title="上一篇: 更改Ubuntu引导界面背景">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a class="nav-table-content" style="display: none;" title="点击按钮隐藏或者显示文章目录"><i class="fa fa-list-ol" aria-hidden="true"></i><i class="fa fa-times"></i></a>
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/11/24/mysql-create-database-and-user/" title="下一篇: mysql创建库及分配用户">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/05/28/git-update-after-forked/">Fork项目之后更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/23/js-replace-all/">实现replaceAll</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/24/browser-remove-baidu-promotion/">屏蔽百度推广</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/12/git-repo-migration/">Git库迁移</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/23/ubuntu-modify-boot-background-image/">更改Ubuntu引导界面背景</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/04/fe-webuploader-useage/">百度webuploader使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/24/mysql-create-database-and-user/">mysql创建库及分配用户</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/13/docker-install-mysql/">docker安装mysql</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/05/docker-cannot-connected-network/">docker容器不能联网的解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/25/docker-compile-and-install-python2/">docker编译安装python2.7</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/23/oracle-java-concurrency-tutorial/">Oracle官方并发教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/26/gradle-change-cache-directory/">修改Gradle缓存目录</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/10/14/js-disable-right-click-menu-in-broswer/">禁用浏览器鼠标右键</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/05/12/js-mouse-to-table-change-color/">鼠标移动到表格行变色</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/04/30/ajax-post-info-is-garbled/">ajax的post请求出现乱码问题</a></li></ul>
+
+
+
+<div class="left-col-nav" id="left-col-nav">
+    <a href="javascript:void(0);" title="隐藏左侧">
+        <i class="fa fa-angle-double-left"></i>
+    </a>
+</div>
+<script>
+    $("#left-col-nav > a > i").click(function() {
+        var cls = $(this).attr("class");
+        if(cls.indexOf("fa-angle-double-left") > -1){
+            $(this).removeClass("fa-angle-double-left");
+            $(this).addClass("fa-angle-double-right");
+            $(this).parent().attr("title", "显示左侧");
+            $(this).parent().data("title", "显示左侧"); // 更新缓存
+
+            // 隐藏左侧
+            $(".left-col").hide(); // 左侧隐藏
+            $(".mid-col").css("left", "0px"); // 改变主题宽度
+            $("#post-nav-button").css("left", "0px"); // 改变切换文章栏位置
+            $("#left-col-nav").css("left", "0px"); // 隐藏显示图标位置
+            //显示目录图标
+            $(".nav-table-content").show();
+        }else{
+            $(this).removeClass("fa-angle-double-right");
+            $(this).addClass("fa-angle-double-left");
+            $(this).parent().attr("title", "隐藏左侧");
+            $(this).parent().data("title", "隐藏左侧"); // 更新缓存
+            // 显示左侧
+            $(".left-col").show();
+            $(".mid-col").css("left", "300px");
+            $("#post-nav-button").css("left", "300px"); // 改变切换文章栏位置
+            $("#left-col-nav").css("left", "300px"); // 隐藏显示图标位置
+            //隐藏目录图标
+            $(".nav-table-content").hide();
+        }
+    })
+</script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Facingsea
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script language="javascript">
+    window.onload = function() {
+        $("[title]").each(function() {
+            layerTip(this);
+        });
+        $("#scroll").each(function() {
+            layerTip(this);
+        });
+        $("#tocButton, #comments").each(function() {
+            layerTip(this);
+        });
+        $("#post-nav-button").each(function() {
+            layerTip(this);
+        });
+        $(".social").each(function() {
+            layerTip(this);
+        });
+
+        function layerTip(ele){
+            var $ele = $(ele);
+            var title = $ele.attr('title');
+            if (title == undefined || title == "") return;
+            var layerIndex = -1;
+            $ele.data('title', title).removeAttr('title').hover(
+                function() {
+                    $ele.attr('title', '');
+                    layerIndex = layer.tips($ele.data('title'), ele, {
+                        tips: 3
+                    });
+                }, function() {
+                    $ele.attr('title', title);
+                    if(layerIndex != -1){
+                        layer.close(layerIndex);
+                    }
+                });
+        }
+    };
+</script>
+
+
+
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </div>
+</body>
+</html>

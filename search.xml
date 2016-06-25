@@ -4,6 +4,68 @@
   
     
     <entry>
+      <title><![CDATA[Windows下安装Mongodb]]></title>
+      <url>http://facingsea.com/2016/06/25/mongodb-install-on-windows/</url>
+      <content type="html"><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>MongoDB提供了.msi和.zip两种社区版下载，参见<a href="https://www.mongodb.org/dl/win32/x86_64-2008plus-ssl?_ga=1.76096855.312951906.1466825504" target="_blank" rel="external">Download MongoDB</a>，这里我下载了.zip的格式。</p>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>.zip形式直接解压到要安装的目录，如<code>D:\dev\mongodb</code>，目录结构为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- mongodb/</span><br><span class="line">--     bin/</span><br><span class="line">--         *.exe</span><br><span class="line">--         *.pdb</span><br><span class="line">--     GNU-AGPL-3.0</span><br><span class="line">--     MPL-2</span><br><span class="line">--     README</span><br><span class="line">--     THIRD-PARTY-NOTICES</span><br></pre></td></tr></table></figure></p>
+<p><code>bin/</code>下对应文件介绍：</p>
+<table>
+<thead>
+<tr>
+<th>Component Set</th>
+<th>Binaries</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server（服务）</td>
+<td>mongod.exe</td>
+</tr>
+<tr>
+<td>Router（路由）</td>
+<td>mongos.exe</td>
+</tr>
+<tr>
+<td>Client（客户端）</td>
+<td>mongo.exe</td>
+</tr>
+<tr>
+<td>MonitoringTools（监控工具）</td>
+<td>mongostat.exe, mongotop.exe</td>
+</tr>
+<tr>
+<td>ImportExportTools（导入导出工具）</td>
+<td>mongodump.exe, mongorestore.exe, mongoexport.exe, mongoimport.exe</td>
+</tr>
+<tr>
+<td>MiscellaneousTools（辅助工具）</td>
+<td>bsondump.exe, mongofiles.exe, mongooplog.exe, mongoperf.exe</td>
+</tr>
+</tbody>
+</table>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><h3 id="环境构建"><a href="#环境构建" class="headerlink" title="环境构建"></a>环境构建</h3><p>MongoDB需要一个目录去存放数据，默认的目录是<code>\data\db</code>，该目录需要手动创建，如目录全路径为<code>D:\dev\mongodb\data\db</code>，启动命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\dev\mongodb\bin\mongod.exe --dbpath D:\dev\mongodb\data\db</span><br></pre></td></tr></table></figure></p>
+<p>如果路径中包含空格，需要用双引号括起来：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\dev\mongodb\bin\mongod.exe --dbpath <span class="string">"D:\dev\mongodb\data db"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="开启MongoDB服务"><a href="#开启MongoDB服务" class="headerlink" title="开启MongoDB服务"></a>开启MongoDB服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\dev\mongodb\bin\mongod.exe</span><br></pre></td></tr></table></figure>
+<h3 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h3><p>要连接MongoDB服务，需要执行<code>mongo.exe</code>命令，另外打开一个cmd，输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\dev\mongodb\bin\mongo.exe</span><br></pre></td></tr></table></figure></p>
+<p>控制台输出：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MongoDB shell version: 3.2.7-44-ge9746ac</span><br><span class="line">connecting to: <span class="built_in">test</span></span><br><span class="line">Welcome to the MongoDB shell.</span><br><span class="line">For interactive <span class="built_in">help</span>, <span class="built_in">type</span> <span class="string">"help"</span>.</span><br><span class="line">For more comprehensive documentation, see</span><br><span class="line">        http://docs.mongodb.org/</span><br><span class="line">Questions? Try the support group</span><br><span class="line">        http://groups.google.com/group/mongodb-user</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+<p>表示连接成功。<br>如停止连接，可按<code>Control+C</code>。</p>
+<h2 id="配置windows服务"><a href="#配置windows服务" class="headerlink" title="配置windows服务"></a>配置windows服务</h2><p>加入windows服务后，可以开机启动，很方便。<br>1、创建db和log两个目录，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\dev\mongodb\data\db</span><br><span class="line">D:\dev\mongodb\data\log</span><br></pre></td></tr></table></figure></p>
+<p>2、创建配置文件<br>我们可以创建一个配置文件，该文件必须包含<code>systemLog.path</code>，其他可选配置参见：<a href="https://docs.mongodb.com/manual/reference/configuration-options/" target="_blank" rel="external">configuration-options</a>。如文件路径为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\dev\mongodb\mongod.cfg</span><br></pre></td></tr></table></figure></p>
+<p>内容为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemLog:</span><br><span class="line">    destination: file</span><br><span class="line">    path: D:\dev\mongodb\data\log\mongod.log</span><br><span class="line">storage:</span><br><span class="line">    dbPath: D:\dev\mongodb\data\db</span><br></pre></td></tr></table></figure></p>
+<p>3、注册为服务</p>
+<blockquote>
+<p>以下命令需要以管理员身份打开cmd！</p>
+</blockquote>
+<p>命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\dev\mongodb\bin&gt;mongod.exe --config D:\dev\mongodb\mongod.cfg --install</span><br></pre></td></tr></table></figure></p>
+<p>4、启动服务<br>现在启动MongoDB服务命令可以使用windows方式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start MongoDB</span><br></pre></td></tr></table></figure></p>
+<p>5、停止服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net stop MongoDB</span><br></pre></td></tr></table></figure></p>
+<p>如果要移除该服务，可执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\dev\mongodb\bin&gt;mongod.exe --remove</span><br></pre></td></tr></table></figure></p>
+<h2 id="所遇问题"><a href="#所遇问题" class="headerlink" title="所遇问题"></a>所遇问题</h2><h3 id="系统丢失dll文件"><a href="#系统丢失dll文件" class="headerlink" title="系统丢失dll文件"></a>系统丢失dll文件</h3><p>启动时，系统报缺失<code>MSVCP140.dll</code>和<code>VCRUNTIME140.dll</code>文件<br>方案一：下载对应dll文件<br>方案二：更换老一点的版本</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1、MongoDB: <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/" target="_blank" rel="external">https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Fork项目之后更新]]></title>
       <url>http://facingsea.com/2016/05/28/git-update-after-forked/</url>
       <content type="html"><![CDATA[<p>假如有一项目A，从A项目fork的项目B，当项目A有更新之后，项目B需要从项目A获取更新的内容，可以按以下操作：<br>1、clone项目B到本地<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> B_REPO_URL</span><br></pre></td></tr></table></figure></p>
@@ -38,6 +100,14 @@
       <url>http://facingsea.com/2016/02/12/git-repo-migration/</url>
       <content type="html"><![CDATA[<p>有时我们需要将库迁移，如从bitbucket迁到github，可采用以下方式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --mirror https://bitbucket.org/exampleuser/repository-to-mirror.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># Make a bare mirrored clone of the repository</span></span><br><span class="line"><span class="built_in">cd</span> repository-to-mirror.git</span><br><span class="line">git remote <span class="built_in">set</span>-url --push origin https://github.com/exampleuser/mirrored</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set the push location to your mirror</span></span><br><span class="line">git push --mirror</span><br></pre></td></tr></table></figure>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[eclipse部分插件安装记录]]></title>
+      <url>http://facingsea.com/2015/12/25/eclipse-plugin-install-record/</url>
+      <content type="html"><![CDATA[<h2 id="安装emmet"><a href="#安装emmet" class="headerlink" title="安装emmet"></a>安装emmet</h2><p>emmet是一款强大的前端提示工具，它使用仿CSS选择器的语法来生成代码，大大提高了HTML/CSS代码编写的速度。<br>按照eclipse在线安装的方式，location为<code>http://emmet.io/eclipse/updates/</code>。</p>
+<h3 id="快捷键冲突"><a href="#快捷键冲突" class="headerlink" title="快捷键冲突"></a>快捷键冲突</h3><p>安装后，eclipse的删除行快捷键与emmet的match pair outward 快捷键冲突，打开eclipse -&gt; window -&gt; preferences -&gt; General -&gt; Keys， 找到对应快捷键修改即可。</p>
+]]></content>
     </entry>
     
     <entry>

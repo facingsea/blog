@@ -15,16 +15,16 @@
 
 
 
-<meta name="description" content="禁用浏览器鼠标右键">
+<meta name="description" content="JDK源码调试并显示变量信息">
 <meta property="og:type" content="article">
-<meta property="og:title" content="禁用浏览器鼠标右键">
-<meta property="og:url" content="http://facingsea.com/2013/10/14/js-disable-right-click-menu-in-broswer/index.html">
+<meta property="og:title" content="JDK源码调试并显示变量信息">
+<meta property="og:url" content="http://facingsea.com/2016/06/28/java-jdk-debug-and-show-variable-info/index.html">
 <meta property="og:site_name" content="Facingsea">
-<meta property="og:description" content="禁用浏览器鼠标右键">
-<meta property="og:updated_time" content="2016-06-21T06:00:29.314Z">
+<meta property="og:description" content="JDK源码调试并显示变量信息">
+<meta property="og:updated_time" content="2016-06-29T07:02:54.100Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="禁用浏览器鼠标右键">
-<meta name="twitter:description" content="禁用浏览器鼠标右键">
+<meta name="twitter:title" content="JDK源码调试并显示变量信息">
+<meta name="twitter:description" content="JDK源码调试并显示变量信息">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>禁用浏览器鼠标右键 | Facingsea</title>
+<title>JDK源码调试并显示变量信息 | Facingsea</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -261,11 +261,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-js-disable-right-click-menu-in-broswer" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-java-jdk-debug-and-show-variable-info" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2013/10/14/js-disable-right-click-menu-in-broswer/" class="article-date">
-      <time datetime="2013-10-14T03:11:45.000Z" itemprop="datePublished">2013-10-14</time>
+      <a href="/2016/06/28/java-jdk-debug-and-show-variable-info/" class="article-date">
+      <time datetime="2016-06-28T15:20:20.000Z" itemprop="datePublished">2016-06-28</time>
 </a>
     </div>
   
@@ -278,7 +278,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      禁用浏览器鼠标右键
+      JDK源码调试并显示变量信息
     </h1>
   
 
@@ -287,13 +287,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/js/">js</a>
+    <a class="article-category-link" href="/categories/java/">java</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jdk/">jdk</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -303,8 +303,37 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">document</span>.oncontentmenu = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(e.preventDefault)&#123;</span><br><span class="line">			e.preventDefault();</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			e.returnValue = <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>preventDefault是火狐<br>returnVal=false是IE浏览器的</p>
+        <p>在调试程序时，如果进入JDK源码后，会发现源码中的变量是无法显示具体值的，这是因为JDK在打包时默认去除了debug的信息，来减少jar包的大小。</p>
+<p>下面可以自己手动编译（使用系统：windows10，JDK：1.8.0_60）：</p>
+<h2 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h2><p>新创建一个目录，如<code>E:\tmp</code>，在tmp目录中，创建存放源码的<code>jdk8_src</code>和输出信息的<code>jdk8_debug</code>两个目录。</p>
+<h2 id="拷贝JDK源码"><a href="#拷贝JDK源码" class="headerlink" title="拷贝JDK源码"></a>拷贝JDK源码</h2><p>从<code>JDK_HOME</code>中拿到<code>src.zip</code>，并将其解压到<code>jdk8_src</code>，此时目录结构为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- E:\tmp</span><br><span class="line">-      jdk8_src\</span><br><span class="line">-          com\...</span><br><span class="line">-          java\...</span><br><span class="line">-          javax\...</span><br><span class="line">-          launcher\...</span><br><span class="line">-          org\...</span><br><span class="line">-      jdk8_debug\</span><br></pre></td></tr></table></figure></p>
+<p>可以从中挑选一部分来编译，比如<code>java/</code>和<code>javax/</code>，这里暂时先编译全部。</p>
+<h2 id="拷贝依赖jar"><a href="#拷贝依赖jar" class="headerlink" title="拷贝依赖jar"></a>拷贝依赖jar</h2><p>从<code>JDK_HOME\jre\lib</code>下找到<code>rt.jar</code>，将其拷贝到<code>tmp/</code>目录下。</p>
+<h2 id="生成需编译文件列表"><a href="#生成需编译文件列表" class="headerlink" title="生成需编译文件列表"></a>生成需编译文件列表</h2><p>在<code>tmp</code>目录下，打开cmd（按着<code>shift</code>键，然后右键，选择<code>在此处打开命令窗口</code>），执行以下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir /B /S /X jdk8_src\*.java &gt; filelist.txt</span><br></pre></td></tr></table></figure></p>
+<p>该命令主要是将所要编译的java文件列表写入到当前目录的filelist.txt文件中。</p>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>执行以下<code>javac</code>命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac -J-Xms16m -J-Xmx1024m -sourcepath E:\tmp\jdk8_src -cp E:\tmp\rt.jar <span class="_">-d</span> E:\tmp\jdk8_debug -g @filelist.txt &gt;&gt; log.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p>
+<p>该命令将会把编译后的所有文件放到<code>jdk8_debug</code>目录中，并在<code>tmp</code>目录下生成<code>log.txt</code>来存放编译的结果信息，打开该文件，忽略前面的警告信息，会发现文件的最后出现许多类似以下错误信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">E:\tmp\jdk8_src\com\sun\java\swing\plaf\gtk\GTKLookAndFeel.java:45: 错误: 找不到符号</span><br><span class="line">import sun.awt.UNIXToolkit;</span><br><span class="line">              ^</span><br><span class="line">  符号:   类 UNIXToolkit</span><br><span class="line">  位置: 程序包 sun.awt</span><br><span class="line">E:\tmp\jdk8_src\com\sun\java\swing\plaf\gtk\GTKStyle.java:37: 错误: 找不到符号</span><br><span class="line">import sun.awt.UNIXToolkit;</span><br><span class="line">              ^</span><br><span class="line">  符号:   类 UNIXToolkit</span><br><span class="line">  位置: 程序包 sun.awt</span><br></pre></td></tr></table></figure></p>
+<p>查看所有错误，会发现都是<code>com</code>包下的，最简单的方式就是删除<code>jdk8_src</code>目录下的<code>com</code>目录，重新执行上面的<code>生成需编译文件列表</code>和<code>编译</code>两个步骤即可编译成功。<br>如果不想删除整个<code>com</code>目录，可以考虑删除对应报错的文件，下面列出出错的文件目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">E:\tmp\jdk8_src\com\sun\java\swing\plaf\gtk\GTKLookAndFeel.java</span><br><span class="line">E:\tmp\jdk8_src\com\sun\java\swing\plaf\gtk\GTKStyle.java</span><br><span class="line">E:\tmp\jdk8_src\com\sun\java\swing\plaf\gtk\GTKPainter.java</span><br><span class="line">E:\tmp\jdk8_src\com\sun\java\swing\plaf\gtk\PangoFonts.java</span><br><span class="line">E:\tmp\jdk8_src\com\sun\source\util\JavacTask.java</span><br><span class="line">E:\tmp\jdk8_src\com\sun\java\swing\plaf\gtk\GTKEngine.java</span><br></pre></td></tr></table></figure></p>
+<p>从目录结构中可以看出，报错的基本都是<code>swing</code>包下<code>gtk</code>相关的，熟悉<code>linux</code>应该都知道<code>gtk</code>是<code>GNU/Linux</code>下开发图形界面的应用程序的主流开发工具之一，在<code>windows</code>下不需要这些，可以<strong>手动删除整个<code>gtk</code>包</strong>。<br>还有一个是<code>JavacTask.java</code>，根据该文件中的类注释：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Provides access to functionality specific to the JDK Java Compiler, javac.</span><br></pre></td></tr></table></figure></p>
+<p>可理解为提供了访问JDK中Java编译器的指定功能，根据错误信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E:\tmp\jdk8_src\com\sun\source\util\JavacTask.java:40: 错误: 程序包com.sun.tools.javac.api不存在</span><br><span class="line">import com.sun.tools.javac.api.BasicJavacTask;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出应该是<code>com.sun</code>包中某些类已经被移除，才导致的报错，由于该类被引用的很多，只删除该文件肯定还是会报错的，这里可以这样做：</p>
+<blockquote>
+<ol>
+<li>从<code>JDK_HOME\jre\lib</code>下找到<code>tools.jar</code>，将其拷贝到<code>tmp/</code>目录下，这时该目录下有两个jar：<code>rt.jar</code>和<code>tools.jar</code>。</li>
+<li>删除之前生成的<code>filelist.txt</code>和<code>log.txt</code>两个文件（因为之前删除了<code>gtk</code>包，列表需要重新生成）</li>
+<li>重新生成<code>filelist.txt</code>，参见步骤5。</li>
+<li>重新执行<code>javac</code>命令，并加入新引入的<code>tools.jar</code>包：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac -J-Xms16m -J-Xmx1024m -sourcepath E:\tmp\jdk8_src -cp E:\tmp\rt.jar;E:\tmp\tools.jar <span class="_">-d</span> E:\tmp\jdk8_debug -g @filelist.txt &gt;&gt; log.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p>执行完后，查看<code>log.txt</code>，可以看出没了错误信息，只剩下警告信息。进入<code>jdk8_debug</code>目录，可以看到该目录下已经有了编译好的class文件。</p>
+<h2 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h2><p>使用cmd进入<code>jdk8_debug</code>目录，执行打包命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jar cf0 rt_debug.jar *</span><br></pre></td></tr></table></figure></p>
+<p>该命令生成的rt_debug.jar包就是带有debug信息的rt包。</p>
+<h2 id="加入到JDK下"><a href="#加入到JDK下" class="headerlink" title="加入到JDK下"></a>加入到JDK下</h2><p>拷贝<code>rt_debug.jar</code>文件到<code>JDK_HOME\jre\lib\endorsed</code>，如果<code>endorsed</code>目录不存在就新建一个。</p>
+<p>现在已经完成所有的编译工作，可以使用eclipse来调试了。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="http://stackoverflow.com/questions/18255474/debug-jdk-source-cant-watch-variable-what-it-is/18255852#18255852" target="_blank" rel="external">debug jdk source can’t watch variable what it is</a></li>
+</ol>
 
       
     </div>
@@ -313,13 +342,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2013/10/14/js-disable-right-click-menu-in-broswer/">禁用浏览器鼠标右键</a></p>
+        <p><span>本文标题:</span><a href="/2016/06/28/java-jdk-debug-and-show-variable-info/">JDK源码调试并显示变量信息</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Facingsea</a></p>
-        <p><span>发布时间:</span>2013-10-14, 11:11:45</p>
-        <p><span>最后更新:</span>2016-06-21, 14:00:29</p>
+        <p><span>发布时间:</span>2016-06-28, 23:20:20</p>
+        <p><span>最后更新:</span>2016-06-29, 15:02:54</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2013/10/14/js-disable-right-click-menu-in-broswer/" title="禁用浏览器鼠标右键">http://facingsea.com/2013/10/14/js-disable-right-click-menu-in-broswer/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://facingsea.com/2013/10/14/js-disable-right-click-menu-in-broswer/　　作者: Facingsea" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/06/28/java-jdk-debug-and-show-variable-info/" title="JDK源码调试并显示变量信息">http://facingsea.com/2016/06/28/java-jdk-debug-and-show-variable-info/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://facingsea.com/2016/06/28/java-jdk-debug-and-show-variable-info/　　作者: Facingsea" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -331,16 +360,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2014/11/26/gradle-change-cache-directory/">
-                    修改Gradle缓存目录
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2013/05/12/js-mouse-to-table-change-color/">
-                    鼠标移动到表格行变色
+                <a href="/2016/06/26/mongodb-3-user-db/">
+                    MongoDB 3.x 创建用户
                 </a>
             </div>
         
@@ -351,7 +374,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建目录"><span class="toc-number">1.</span> <span class="toc-text">创建目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拷贝JDK源码"><span class="toc-number">2.</span> <span class="toc-text">拷贝JDK源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拷贝依赖jar"><span class="toc-number">3.</span> <span class="toc-text">拷贝依赖jar</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生成需编译文件列表"><span class="toc-number">4.</span> <span class="toc-text">生成需编译文件列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译"><span class="toc-number">5.</span> <span class="toc-text">编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打包"><span class="toc-number">6.</span> <span class="toc-text">打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加入到JDK下"><span class="toc-number">7.</span> <span class="toc-text">加入到JDK下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">8.</span> <span class="toc-text">参考</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn,
@@ -382,7 +405,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"禁用浏览器鼠标右键　| Facingsea　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"JDK源码调试并显示变量信息　| Facingsea　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -398,7 +421,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" data-thread-key="2013/10/14/js-disable-right-click-menu-in-broswer/" data-title="禁用浏览器鼠标右键" data-url="http://facingsea.com/2013/10/14/js-disable-right-click-menu-in-broswer/"></div>
+    <div class="ds-thread" data-thread-key="2016/06/28/java-jdk-debug-and-show-variable-info/" data-title="JDK源码调试并显示变量信息" data-url="http://facingsea.com/2016/06/28/java-jdk-debug-and-show-variable-info/"></div>
     <script>
         var duoshuoQuery = {short_name:"facingsea"};
         var loadComment = function(){
@@ -421,16 +444,14 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2014/11/26/gradle-change-cache-directory/" title="上一篇: 修改Gradle缓存目录">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a class="nav-table-content" style="display: none;" title="点击按钮隐藏或者显示文章目录"><i class="fa fa-list-ol" aria-hidden="true"></i><i class="fa fa-times"></i></a>
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2013/05/12/js-mouse-to-table-change-color/" title="下一篇: 鼠标移动到表格行变色">
+            <a href="/2016/06/26/mongodb-3-user-db/" title="下一篇: MongoDB 3.x 创建用户">
                 <i class="fa fa-angle-right"></i>
             </a>
         

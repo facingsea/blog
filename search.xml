@@ -41,6 +41,32 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Java没有引用传递，只有值传递]]></title>
+      <url>http://facingsea.com/2016/06/26/java-no-transfer-reference-just-value/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>之前一直以为Java中除了基本类型外都是引用传递，最近才发现并不是这样，Java中只有值传递，没有引用传递！</p>
+</blockquote>
+<p>下面来分类看一下：</p>
+<h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><p>Java中基本类型分为三类：数值类型、字符类型（char）、布尔类型（boolean），数值类型又分为整数型和浮点型。整数型包括byte、short、int、long，浮点型包括float、double，字符类型对应char，布尔类型就是所谓的true和false。<br>先看以下程序（使用Junit测试）：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testIntPassing</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    processInt(num);</span><br><span class="line">    System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processInt</span><span class="params">(<span class="keyword">int</span> param)</span></span>&#123;</span><br><span class="line">    param = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果为<code>0</code>，可以看出在<code>processInt</code>方法中的赋值其实是不影响原值<code>num</code>的，</p>
+<p><code>num</code>作为参数传递给<code>processInt()</code>方法时，是将内存空间中num所指向的那个<strong>存储单元中存放的值</strong>，即<code>0</code>,传送给了<code>processInt()</code>方法中的<code>param</code>变量，而这个<code>param</code>变量<strong>也在内存空间中分配了一个存储单元</strong>，这个时候，就把<code>num</code>的值<code>0</code>传送给了这个存储单元中。此后，在<code>processInt()</code>方法中对<code>param</code>的一切操作都是针对<code>param</code>所指向的这个存储单元，与<code>num</code>所指向的那个存储单元没有关系了！<br>自然，在函数调用之后，<code>num</code>所指向的存储单元的值还是没有发生变化，这就是所谓的“值传递”！值传递的精髓是：<strong>传递的是存储单元中的内容，而非地址或者引用！</strong></p>
+<h2 id="对象类型"><a href="#对象类型" class="headerlink" title="对象类型"></a>对象类型</h2><p>首先来看程序：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name = <span class="string">"jack"</span>;</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Person person = <span class="keyword">new</span> Person();</span><br><span class="line">        System.out.println(<span class="string">"old: "</span> + person.name);</span><br><span class="line">        changeName(person);</span><br><span class="line">        System.out.println(<span class="string">"new: "</span> + person.name);</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">changeName</span><span class="params">(Person p)</span></span>&#123;</span><br><span class="line">        p.name = <span class="string">"rose"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">old: jack</span><br><span class="line">new: rose</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Java 编程语言只有值传递参数。当一个对象实例作为一个参数被传递到方法中时，参数的值就是<strong>该对象引用的一个副本</strong>。指向同一个对象,对象的内容可以在被调用的方法中改变，但对象的引用(不是引用的副本)是永远不会改变的。 </p>
+</blockquote>
+<p>下面借助图来说明一下：<br><img src="/assert/java-no-transfer-reference-just-value/object-passing-descript.png" alt=""></p>
+<p>主函数中new了一个对象<code>Person</code>，实际分配了两个对象：新创建的<code>Person</code>类的实体对象，和指向该对象的引用变量<code>person</code>。</p>
+<blockquote>
+<p>注意：在java中，新创建的实体对象在堆内存中开辟空间，而引用变量在栈内存中开辟空间</p>
+</blockquote>
+<p>正如如上图所示，左侧是堆空间，用来分配内存给新创建的实体对象，红色框是新建的<code>Person</code>类的实体对象，<code>000012</code>是该实体对象的起始地址；而右侧是栈空间，用来给引用变量和一些临时变量分配内存，新实体对象的引用<code>person</code>就在其中，可以看到它的存储单元的内容是<code>000012</code>，记录的正是新建<code>Person</code>类实体对象的起始地址，也就是说它指向该实体对象。<br>这时候，好戏上台了：<br>调用了<code>changeName()</code>方法，<code>person</code>作为对象参数传入该方法，但是大家特别注意，它传入的是什么！！！<code>person</code>引用变量将自己的存储单元的内容传给了<code>changeName()</code>方法的<code>p</code>变量！也就是将实体对象的地址传给了<code>p</code>变量，从此，在<code>changeName()</code>方法中对<code>p</code>的一切操作都是针对<code>p</code>所指向的这个存储单元，与<code>person</code>引用变量所指向的那个存储单元再没有关系了！<br>回顾一下上面的一个值传递的例子，值传递，就是将存储单元中的内容传给调用函数中的那个参数，这里是不是异曲同工，是所谓“值传递”，而非“引用传递”！</p>
+<p>那为什么对象内部能够发生变化呢？<br>那是因为：<code>p</code>所指向的那个存储单元中的内容是实体对象的地址，使得<code>p</code>也指向了该实体对象，所以才能改变对象内部的属性！<br>这也是我们大多数人会误以为是“引用传递”的终极原因！</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1、<a href="http://guhanjie.iteye.com/blog/1683637" target="_blank" rel="external">Java中只有按值传递，没有按引用传递</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[MongoDB 3.x 创建用户]]></title>
       <url>http://facingsea.com/2016/06/26/mongodb-3-user-db/</url>
       <content type="html"><![CDATA[<blockquote>
@@ -74,28 +100,63 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Java没有引用传递，只有值传递]]></title>
-      <url>http://facingsea.com/2016/06/26/java-no-transfer-reference-just-value/</url>
-      <content type="html"><![CDATA[<blockquote>
-<p>之前一直以为Java中除了基本类型外都是引用传递，最近才发现并不是这样，Java中只有值传递，没有引用传递！</p>
-</blockquote>
-<p>下面来分类看一下：</p>
-<h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><p>Java中基本类型分为三类：数值类型、字符类型（char）、布尔类型（boolean），数值类型又分为整数型和浮点型。整数型包括byte、short、int、long，浮点型包括float、double，字符类型对应char，布尔类型就是所谓的true和false。<br>先看以下程序（使用Junit测试）：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testIntPassing</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    processInt(num);</span><br><span class="line">    System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processInt</span><span class="params">(<span class="keyword">int</span> param)</span></span>&#123;</span><br><span class="line">    param = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>运行结果为<code>0</code>，可以看出在<code>processInt</code>方法中的赋值其实是不影响原值<code>num</code>的，</p>
-<p><code>num</code>作为参数传递给<code>processInt()</code>方法时，是将内存空间中num所指向的那个<strong>存储单元中存放的值</strong>，即<code>0</code>,传送给了<code>processInt()</code>方法中的<code>param</code>变量，而这个<code>param</code>变量<strong>也在内存空间中分配了一个存储单元</strong>，这个时候，就把<code>num</code>的值<code>0</code>传送给了这个存储单元中。此后，在<code>processInt()</code>方法中对<code>param</code>的一切操作都是针对<code>param</code>所指向的这个存储单元，与<code>num</code>所指向的那个存储单元没有关系了！<br>自然，在函数调用之后，<code>num</code>所指向的存储单元的值还是没有发生变化，这就是所谓的“值传递”！值传递的精髓是：<strong>传递的是存储单元中的内容，而非地址或者引用！</strong></p>
-<h2 id="对象类型"><a href="#对象类型" class="headerlink" title="对象类型"></a>对象类型</h2><p>首先来看程序：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name = <span class="string">"jack"</span>;</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Person person = <span class="keyword">new</span> Person();</span><br><span class="line">        System.out.println(<span class="string">"old: "</span> + person.name);</span><br><span class="line">        changeName(person);</span><br><span class="line">        System.out.println(<span class="string">"new: "</span> + person.name);</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">changeName</span><span class="params">(Person p)</span></span>&#123;</span><br><span class="line">        p.name = <span class="string">"rose"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">old: jack</span><br><span class="line">new: rose</span><br></pre></td></tr></table></figure></p>
+      <title><![CDATA[Netty源码导入eclipse]]></title>
+      <url>http://facingsea.com/2016/06/25/netty-import-source-to-eclipse/</url>
+      <content type="html"><![CDATA[<p>本文源码版本：<a href="https://github.com/netty/netty/tree/netty-4.1.1.Final" target="_blank" rel="external">4.1.1.Final</a><br>官方环境要求：</p>
 <blockquote>
-<p>Java 编程语言只有值传递参数。当一个对象实例作为一个参数被传递到方法中时，参数的值就是<strong>该对象引用的一个副本</strong>。指向同一个对象,对象的内容可以在被调用的方法中改变，但对象的引用(不是引用的副本)是永远不会改变的。 </p>
+<ol>
+<li>JDK：Oracle JDK 7 及以上版本</li>
+<li>Eclipse：64位</li>
+<li>Maven：3.1.1及以上</li>
+</ol>
 </blockquote>
-<p>下面借助图来说明一下：<br><img src="/assert/java-no-transfer-reference-just-value/object-passing-descript.png" alt=""></p>
-<p>主函数中new了一个对象<code>Person</code>，实际分配了两个对象：新创建的<code>Person</code>类的实体对象，和指向该对象的引用变量<code>person</code>。</p>
+<p>本文JDK为Oracle JDK 8 64位，Eclipse为Mars1 64位，Maven为3.3.9，系统为windows 10。</p>
+<h2 id="获取源码"><a href="#获取源码" class="headerlink" title="获取源码"></a>获取源码</h2><p>首先从github上获取对应源码，我这里使用的是<a href="https://github.com/netty/netty/tree/netty-4.1.1.Final" target="_blank" rel="external">4.1.1.Final</a> ，下载后解压到合适的目录。</p>
+<h2 id="导入前准备"><a href="#导入前准备" class="headerlink" title="导入前准备"></a>导入前准备</h2><p>首先确保系统环境中maven配置正常。<br>进入<code>netty-netty-4.1.1.Final\common</code>，使用cmd执行以下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean compile</span><br></pre></td></tr></table></figure></p>
+<p>该命令用来编译<code>common</code>包，先执行该命令的原因是该包下的<code>collection</code>包是通过groovy程序生成，该程序位于<code>netty-netty-4.1.1.Final\common\src\main\script</code>下。<br>命令执行时，可能会出现以下错误：</p>
+<ol>
+<li>格式错误，错误信息如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[INFO]</span><br><span class="line">[INFO] --- maven-checkstyle-plugin:2.10:check (check-style) @ netty-common ---</span><br><span class="line">[INFO] Starting audit...</span><br><span class="line">E:\source\netty\netty-netty-4.1.1.Final-bak\netty-netty-4.1.1.Final\common\src\main\java\io\netty\util\AbstractConstant.java:0: File does not end with a newline.</span><br><span class="line">E:\source\netty\netty-netty-4.1.1.Final-bak\netty-netty-4.1.1.Final\common\src\main\java\io\netty\util\AbstractConstant.java:0: invalid newline character (expected: CRLF)</span><br><span class="line">E:\source\netty\netty-netty-4.1.1.Final-bak\netty-netty-4.1.1.Final\common\src\main\java\io\netty\util\AbstractReferenceCounted.java:0: File does not end with a newline.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>出现该信息的原因是源码中某些java文件不符合<code>check-style</code>规范，解决方案是从<code>netty-netty-4.1.1.Final\all\pom.xml</code>中找到如下配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Disable checkstyle --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-checkstyle-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>check-style<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">phase</span>&gt;</span>none<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>把该配置复制到<code>netty-netty-4.1.1.Final\common\pom.xml</code>文件的<code>&lt;plugins&gt;...&lt;/plugins&gt;</code>里，并且确保<code>&lt;plugin&gt;</code>内容前的缩进<strong>都是空格，不能出现Tab键</strong>，否则可能会出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[INFO] --- xml-maven-plugin:1.0.1:check-format (check-style) @ netty-common ---</span><br><span class="line">[ERROR] E:\source\netty\netty-netty-4.1.1.Final-bak\netty-netty-4.1.1.Final\common\pom.xml:164,12: Insert 3 spaces. Expected 6 found 3 spaces before start element &lt;plugin&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后再次执行上面的编译命令即可编译成功。<br>然后在<code>netty-netty-4.1.1.Final\common\target\generated-sources\collections\java\io\netty\util\collection</code>目录下可以找到新生成的java文件，将该<code>collection</code>目录拷贝到<code>netty-netty-4.1.1.Final\common\src\main\java\io\netty\util</code>目录下，此时该目录下结构大致为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- ...io\netty\util</span><br><span class="line">-		collection\</span><br><span class="line">-       concurrent\</span><br><span class="line">-       internal\</span><br><span class="line">-       *.java</span><br></pre></td></tr></table></figure></p>
+<h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><p>根据官方文档介绍：<a href="http://netty.io/wiki/setting-up-development-environment.html" target="_blank" rel="external">Setting up development environment</a> ：</p>
 <blockquote>
-<p>注意：在java中，新创建的实体对象在堆内存中开辟空间，而引用变量在栈内存中开辟空间</p>
+<ol>
+<li>Ensure to use the 64-bit version of Eclipse.</li>
+<li><a href="http://repo1.maven.org/maven2/kr/motd/maven/os-maven-plugin/1.4.1.Final/os-maven-plugin-1.4.1.Final.jar" target="_blank" rel="external">Download os-maven-plugin</a> and put it into <eclipse_installation_dir>/plugins directory to work around the problem where m2e does not evaluate an extension specified in our pom.xml. (Unlike its name, it’s both a Maven plugin and an Eclipse plugin.)</eclipse_installation_dir></li>
+<li>Import the project via the ‘File → Import… → Existing Maven Projects’ menu.</li>
+<li>Netty project Maven pom.xml settings dictate use of Java SE 1.6, while implicitly using Java 7/8 (1.7/1.8) features if present. This may result in compilation errors in Eclipse. There are two ways to work around this problem:<ol>
+<li>Look in the ‘Window → Preferences → Installed JRE’ menu:<ul>
+<li>Make sure you have Java 7/8 installation available under ‘Installed JRE’</li>
+<li>Map this Java 7/8 installation onto Java 6: ‘Installed JRE → Execution Environments → Java SE 1.6’</li>
+</ul>
+</li>
+<li>Alternatively, Java 7/8 JRE can be selected on per-project basis for each Netty module.</li>
+</ol>
+</li>
+</ol>
 </blockquote>
-<p>正如如上图所示，左侧是堆空间，用来分配内存给新创建的实体对象，红色框是新建的<code>Person</code>类的实体对象，<code>000012</code>是该实体对象的起始地址；而右侧是栈空间，用来给引用变量和一些临时变量分配内存，新实体对象的引用<code>person</code>就在其中，可以看到它的存储单元的内容是<code>000012</code>，记录的正是新建<code>Person</code>类实体对象的起始地址，也就是说它指向该实体对象。<br>这时候，好戏上台了：<br>调用了<code>changeName()</code>方法，<code>person</code>作为对象参数传入该方法，但是大家特别注意，它传入的是什么！！！<code>person</code>引用变量将自己的存储单元的内容传给了<code>changeName()</code>方法的<code>p</code>变量！也就是将实体对象的地址传给了<code>p</code>变量，从此，在<code>changeName()</code>方法中对<code>p</code>的一切操作都是针对<code>p</code>所指向的这个存储单元，与<code>person</code>引用变量所指向的那个存储单元再没有关系了！<br>回顾一下上面的一个值传递的例子，值传递，就是将存储单元中的内容传给调用函数中的那个参数，这里是不是异曲同工，是所谓“值传递”，而非“引用传递”！</p>
-<p>那为什么对象内部能够发生变化呢？<br>那是因为：<code>p</code>所指向的那个存储单元中的内容是实体对象的地址，使得<code>p</code>也指向了该实体对象，所以才能改变对象内部的属性！<br>这也是我们大多数人会误以为是“引用传递”的终极原因！</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1、<a href="http://guhanjie.iteye.com/blog/1683637" target="_blank" rel="external">Java中只有按值传递，没有按引用传递</a></p>
+<p>大致翻译为：</p>
+<ol>
+<li>确保使用的是64位的Eclipse。</li>
+<li><a href="http://repo1.maven.org/maven2/kr/motd/maven/os-maven-plugin/1.4.1.Final/os-maven-plugin-1.4.1.Final.jar" target="_blank" rel="external">下载 os-maven-plugin</a> 并把它放到<eclipse_installation_dir>/plugins 目录。</eclipse_installation_dir></li>
+<li>通过Eclipse菜单导入：’File → Import… → Existing Maven Projects’.</li>
+<li>Netty项目中的pom.xml文件使用的是Java SE 1.6，但是使用了Java 7/8 (1.7/1.8)的特性，所以这可能会导致Eclipse报错，有两个方法解决这个问题：<ol>
+<li>菜单中查找：’Window → Preferences → Installed JRE’：<ul>
+<li>在’Installed JRE’下，确保已经有安装好的Java 7/8 。</li>
+<li>在’Installed JRE → Execution Environments → Java SE 1.6’下，将Java 6 换成已安装好的Java 7/8 。</li>
+</ul>
+</li>
+<li>另外一种就是手动点击每个模块来更新Java 7/8 JRE</li>
+</ol>
+</li>
+</ol>
+<p>按照以上步骤，即可完成导入，期间会出现一个Maven的错误信息，在<code>Programs</code>视图下右键点击<code>Quick Fix</code>即可。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="http://netty.io/wiki/developer-guide.html" target="_blank" rel="external">developer-guide</a></li>
+</ol>
 ]]></content>
     </entry>
     

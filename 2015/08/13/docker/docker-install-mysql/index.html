@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Facingsea" />
+
+
+
+<meta name="description" content="docker安装mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker安装mysql">
+<meta property="og:url" content="http://facingsea.com/2015/08/13/docker/docker-install-mysql/index.html">
+<meta property="og:site_name" content="Facingsea">
+<meta property="og:description" content="docker安装mysql">
+<meta property="og:updated_time" content="2016-06-21T04:25:03.172Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker安装mysql">
+<meta name="twitter:description" content="docker安装mysql">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Facingsea" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>docker安装mysql | Facingsea</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: false,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <link href="//cdn.bootcss.com/layer/2.3/skin/layer.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/layer/2.3/layer.js"></script>
+    <!--
+    yiliaConfig.layer_tip = [true, "//cdn.bootcss.com/layer/2.3/layer.js", "//cdn.bootcss.com/layer/2.3/skin/layer.css"];
+    -->
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?6edcbfb33d2083f1a8aecb4d5f16dacf";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Facingsea</a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=Jx4QFREeEhQQFmdWVglESEo" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/facingsea" title="GitHub"></a>
+                            
+                                <a class="fa Facebook" href="https://www.facebook.com/wangzhf" title="Facebook"></a>
+                            
+                                <a class="fa Twitter" href="https://twitter.com/facingseas" title="Twitter"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/adblock/">adblock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrency/">concurrency</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webuploader/">webuploader</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">面朝大海，春暖花开</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Facingsea</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Facingsea</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=Jx4QFREeEhQQFmdWVglESEo" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/facingsea" title="GitHub"></a>
+                            
+                                <a class="fa Facebook" target="_blank" href="https://www.facebook.com/wangzhf" title="Facebook"></a>
+                            
+                                <a class="fa Twitter" target="_blank" href="https://twitter.com/facingseas" title="Twitter"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-docker/docker-install-mysql" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/13/docker/docker-install-mysql/" class="article-date">
+      <time datetime="2015-08-13T15:00:20.000Z" itemprop="datePublished">2015-08-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      docker安装mysql
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/docker/">docker</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="下载mysql"><a href="#下载mysql" class="headerlink" title="下载mysql"></a>下载mysql</h2><p>如下载版本5.2.26：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -c  http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.26-linux-glibc2.5-x86_64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>-c 表示下载中断可以续传</p>
+<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><p>一般情况下，将mysql安装到/usr/local/mysql下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf Mysql-*.tar.gz </span><br><span class="line">mv Mysql-* /usr/<span class="built_in">local</span>/mysql</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>由于是在docker环境下，没有必要再为mysql创建用户及用户组，直接用root即可<br>执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/mysql/scripts/mysql_install_db --user=root</span><br></pre></td></tr></table></figure></p>
+<p>输出信息为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">Installing MySQL system tables...2015-08-13 14:47:13 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_<span class="keyword">for</span>_timestamp server option (see documentation <span class="keyword">for</span> more details).</span><br><span class="line">2015-08-13 14:47:13 0 [Note] ./bin/mysqld (mysqld 5.6.26) starting as process 114 ...</span><br><span class="line">2015-08-13 14:47:13 114 [Note] InnoDB: Using atomics to ref count buffer pool pages</span><br><span class="line">2015-08-13 14:47:13 114 [Note] InnoDB: The InnoDB memory heap is disabled</span><br><span class="line">2015-08-13 14:47:13 114 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins</span><br><span class="line">2015-08-13 14:47:13 114 [Note] InnoDB: Memory barrier is not used</span><br><span class="line">2015-08-13 14:47:13 114 [Note] InnoDB: Compressed tables use zlib 1.2.3</span><br><span class="line">2015-08-13 14:47:13 114 [Note] InnoDB: Using Linux native AIO</span><br><span class="line">2015-08-13 14:47:13 114 [Note] InnoDB: Using CPU crc32 instructions</span><br><span class="line">2015-08-13 14:47:13 114 [Note] InnoDB: Initializing buffer pool, size = 128.0M</span><br><span class="line">2015-08-13 14:47:13 114 [Note] InnoDB: Completed initialization of buffer pool</span><br><span class="line">2015-08-13 14:47:13 114 [Note] InnoDB: The first specified data file ./ibdata1 did not exist: a new database to be created!</span><br><span class="line">2015-08-13 14:47:13 114 [Note] InnoDB: Setting file ./ibdata1 size to 12 MB</span><br><span class="line">2015-08-13 14:47:13 114 [Note] InnoDB: Database physically writes the file full: wait...</span><br><span class="line">2015-08-13 14:47:14 114 [Note] InnoDB: Setting <span class="built_in">log</span> file ./ib_logfile101 size to 48 MB</span><br><span class="line">2015-08-13 14:47:18 114 [Note] InnoDB: Setting <span class="built_in">log</span> file ./ib_logfile1 size to 48 MB</span><br><span class="line">2015-08-13 14:47:20 114 [Note] InnoDB: Renaming <span class="built_in">log</span> file ./ib_logfile101 to ./ib_logfile0</span><br><span class="line">2015-08-13 14:47:20 114 [Warning] InnoDB: New <span class="built_in">log</span> files created, LSN=45781</span><br><span class="line">2015-08-13 14:47:20 114 [Note] InnoDB: Doublewrite buffer not found: creating new</span><br><span class="line">2015-08-13 14:47:21 114 [Note] InnoDB: Doublewrite buffer created</span><br><span class="line">2015-08-13 14:47:21 114 [Note] InnoDB: 128 rollback segment(s) are active.</span><br><span class="line">2015-08-13 14:47:21 114 [Warning] InnoDB: Creating foreign key constraint system tables.</span><br><span class="line">2015-08-13 14:47:21 114 [Note] InnoDB: Foreign key constraint system tables created</span><br><span class="line">2015-08-13 14:47:21 114 [Note] InnoDB: Creating tablespace and datafile system tables.</span><br><span class="line">2015-08-13 14:47:21 114 [Note] InnoDB: Tablespace and datafile system tables created.</span><br><span class="line">2015-08-13 14:47:21 114 [Note] InnoDB: Waiting <span class="keyword">for</span> purge to start</span><br><span class="line">2015-08-13 14:47:21 114 [Note] InnoDB: 5.6.26 started; <span class="built_in">log</span> sequence number 0</span><br><span class="line">2015-08-13 14:47:28 114 [Note] Binlog end</span><br><span class="line">2015-08-13 14:47:28 114 [Note] InnoDB: FTS optimize thread exiting.</span><br><span class="line">2015-08-13 14:47:28 114 [Note] InnoDB: Starting shutdown...</span><br><span class="line">2015-08-13 14:47:29 114 [Note] InnoDB: Shutdown completed; <span class="built_in">log</span> sequence number 1625977</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">Filling <span class="built_in">help</span> tables...2015-08-13 14:47:29 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_<span class="keyword">for</span>_timestamp server option (see documentation <span class="keyword">for</span> more details).</span><br><span class="line">2015-08-13 14:47:29 0 [Note] ./bin/mysqld (mysqld 5.6.26) starting as process 137 ...</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: Using atomics to ref count buffer pool pages</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: The InnoDB memory heap is disabled</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: Memory barrier is not used</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: Compressed tables use zlib 1.2.3</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: Using Linux native AIO</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: Using CPU crc32 instructions</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: Initializing buffer pool, size = 128.0M</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: Completed initialization of buffer pool</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: Highest supported file format is Barracuda.</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: 128 rollback segment(s) are active.</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: Waiting <span class="keyword">for</span> purge to start</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: 5.6.26 started; <span class="built_in">log</span> sequence number 1625977</span><br><span class="line">2015-08-13 14:47:29 137 [Note] Binlog end</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: FTS optimize thread exiting.</span><br><span class="line">2015-08-13 14:47:29 137 [Note] InnoDB: Starting shutdown...</span><br><span class="line">2015-08-13 14:47:31 137 [Note] InnoDB: Shutdown completed; <span class="built_in">log</span> sequence number 1625987</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line">To start mysqld at boot time you have to copy</span><br><span class="line">support-files/mysql.server to the right place <span class="keyword">for</span> your system</span><br><span class="line"></span><br><span class="line">PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !</span><br><span class="line">To <span class="keyword">do</span> so, start the server, <span class="keyword">then</span> issue the following commands:</span><br><span class="line"></span><br><span class="line">  ./bin/mysqladmin -u root password <span class="string">'new-password'</span></span><br><span class="line">  ./bin/mysqladmin -u root -h ubuntu14 password <span class="string">'new-password'</span></span><br><span class="line"></span><br><span class="line">Alternatively you can run:</span><br><span class="line"></span><br><span class="line">  ./bin/mysql_secure_installation</span><br><span class="line"></span><br><span class="line"><span class="built_in">which</span> will also give you the option of removing the <span class="built_in">test</span></span><br><span class="line">databases and anonymous user created by default.  This is</span><br><span class="line">strongly recommended <span class="keyword">for</span> production servers.</span><br><span class="line"></span><br><span class="line">See the manual <span class="keyword">for</span> more instructions.</span><br><span class="line"></span><br><span class="line">You can start the MySQL daemon with:</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cd</span> . ; ./bin/mysqld_safe &amp;</span><br><span class="line"></span><br><span class="line">You can <span class="built_in">test</span> the MySQL daemon with mysql-test-run.pl</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cd</span> mysql-test ; perl mysql-test-run.pl</span><br><span class="line"></span><br><span class="line">Please report any problems at http://bugs.mysql.com/</span><br><span class="line"></span><br><span class="line">The latest information about MySQL is available on the web at</span><br><span class="line"></span><br><span class="line">  http://www.mysql.com</span><br><span class="line"></span><br><span class="line">Support MySQL by buying support/licenses at http://shop.mysql.com</span><br><span class="line"></span><br><span class="line">New default config file was created as ./my.cnf and</span><br><span class="line">will be used by default by the server when you start it.</span><br><span class="line">You may edit this file to change server settings</span><br></pre></td></tr></table></figure></p>
+<p>可能会出现找不到<code>libaio</code>依赖的错误，执行安装即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install libaio1</span><br></pre></td></tr></table></figure></p>
+<h2 id="启动mysql服务"><a href="#启动mysql服务" class="headerlink" title="启动mysql服务"></a>启动mysql服务</h2><p>执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/mysqld_safe &amp;</span><br></pre></td></tr></table></figure></p>
+<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/mysql -u root</span><br></pre></td></tr></table></figure>
+<p>刚装好时没有密码，所以可以直接登录上</p>
+<h2 id="设置新密码："><a href="#设置新密码：" class="headerlink" title="设置新密码："></a>设置新密码：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/mysqladmin -u root  password <span class="string">'1234'</span></span><br></pre></td></tr></table></figure>
+<p>1234为新密码</p>
+<h2 id="关闭mysql服务："><a href="#关闭mysql服务：" class="headerlink" title="关闭mysql服务："></a>关闭mysql服务：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/mysqladmin -uroot -p1234 shutdown</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/08/13/docker/docker-install-mysql/">docker安装mysql</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Facingsea</a></p>
+        <p><span>发布时间:</span>2015-08-13, 23:00:20</p>
+        <p><span>最后更新:</span>2016-06-21, 12:25:03</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/08/13/docker/docker-install-mysql/" title="docker安装mysql">http://facingsea.com/2015/08/13/docker/docker-install-mysql/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://facingsea.com/2015/08/13/docker/docker-install-mysql/　　作者: Facingsea" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/11/24/mysql/mysql-create-database-and-user/">
+                    mysql创建库及分配用户
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/08/05/docker/docker-cannot-connected-network/">
+                    docker容器不能联网的解决方案
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载mysql"><span class="toc-number">1.</span> <span class="toc-text">下载mysql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解压"><span class="toc-number">2.</span> <span class="toc-text">解压</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动mysql服务"><span class="toc-number">4.</span> <span class="toc-text">启动mysql服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连接"><span class="toc-number">5.</span> <span class="toc-text">连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置新密码："><span class="toc-number">6.</span> <span class="toc-text">设置新密码：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭mysql服务："><span class="toc-number">7.</span> <span class="toc-text">关闭mysql服务：</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script>
+    yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+</script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"docker安装mysql　| Facingsea　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2015/08/13/docker/docker-install-mysql/" data-title="docker安装mysql" data-url="http://facingsea.com/2015/08/13/docker/docker-install-mysql/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"facingsea"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/11/24/mysql/mysql-create-database-and-user/" title="上一篇: mysql创建库及分配用户">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a class="nav-table-content" style="display: none;" title="点击按钮隐藏或者显示文章目录"><i class="fa fa-list-ol" aria-hidden="true"></i><i class="fa fa-times"></i></a>
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/08/05/docker/docker-cannot-connected-network/" title="下一篇: docker容器不能联网的解决方案">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/02/algorithm/algorithm-sort-bubble/">冒泡排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/28/java/common/java-arraylist-increase-capacity/">ArrayList扩容问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/22/node/npm-install-hexo-renderer-sass-solution/">npm install hexo-renderer-sass失败问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/28/java/common/java-jdk-debug-and-show-variable-info/">JDK源码调试并显示变量信息</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/26/mongodb/mongodb-3-user-db/">MongoDB 3.x 创建用户</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/26/java/common/java-no-transfer-reference-just-value/">Java没有引用传递，只有值传递</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/25/netty/netty-import-source-to-eclipse/">Netty源码导入eclipse</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/25/mongodb/mongodb-step-in/">MongoDB初步使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/25/mongodb/mongodb-install-on-windows/">Windows下安装Mongodb</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/28/git/git-update-after-forked/">Fork项目之后更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/23/js/js-replace-all/">实现replaceAll</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/24/browser/browser-remove-baidu-promotion/">屏蔽百度推广</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/12/git/git-repo-migration/">Git库迁移</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/25/eclipse/eclipse-plugin-install-record/">eclipse部分插件安装记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/23/ubuntu/ubuntu-modify-boot-background-image/">更改Ubuntu引导界面背景</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/04/font-end/fe-webuploader-useage/">百度webuploader使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/24/mysql/mysql-create-database-and-user/">mysql创建库及分配用户</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/13/docker/docker-install-mysql/">docker安装mysql</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/05/docker/docker-cannot-connected-network/">docker容器不能联网的解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/25/docker/docker-compile-and-install-python2/">docker编译安装python2.7</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/23/java/java-concurrency-tutorial/">Oracle官方并发教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/26/gradle/gradle-change-cache-directory/">修改Gradle缓存目录</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/10/14/js/js-disable-right-click-menu-in-broswer/">禁用浏览器鼠标右键</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/05/12/js/js-mouse-to-table-change-color/">鼠标移动到表格行变色</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/04/30/js/ajax-post-info-is-garbled/">ajax的post请求出现乱码问题</a></li></ul>
+
+
+
+<div class="left-col-nav" id="left-col-nav">
+    <a href="javascript:void(0);" title="隐藏左侧">
+        <i class="fa fa-angle-double-left"></i>
+    </a>
+</div>
+<script>
+    $("#left-col-nav > a > i").click(function() {
+        var cls = $(this).attr("class");
+        if(cls.indexOf("fa-angle-double-left") > -1){
+            $(this).removeClass("fa-angle-double-left");
+            $(this).addClass("fa-angle-double-right");
+            $(this).parent().attr("title", "显示左侧");
+            $(this).parent().data("title", "显示左侧"); // 更新缓存
+
+            // 隐藏左侧
+            $(".left-col").hide(); // 左侧隐藏
+            $(".mid-col").css("left", "0px"); // 改变主题宽度
+            $("#post-nav-button").css("left", "0px"); // 改变切换文章栏位置
+            $("#left-col-nav").css("left", "0px"); // 隐藏显示图标位置
+            //显示目录图标
+            $(".nav-table-content").show();
+            //隐藏目录默认结构
+            if($("#tocButton").css("display") != "none") {
+                $("#toc").css("display", "none");
+                $("#tocButton").css("display", "none");
+            }
+        }else{
+            $(this).removeClass("fa-angle-double-right");
+            $(this).addClass("fa-angle-double-left");
+            $(this).parent().attr("title", "隐藏左侧");
+            $(this).parent().data("title", "隐藏左侧"); // 更新缓存
+            // 显示左侧
+            $(".left-col").show();
+            $(".mid-col").css("left", "300px");
+            $("#post-nav-button").css("left", "300px"); // 改变切换文章栏位置
+            $("#left-col-nav").css("left", "300px"); // 隐藏显示图标位置
+            //隐藏目录图标
+            $(".nav-table-content").hide();
+
+            // if the toc is showing, change the icon.
+            if($("#toc").is(":visible")){
+                $("#toc").removeClass("common-bg");
+                $("#toc").removeClass("margin-left-30");
+                $(".nav-table-content .fa-list-ol,.nav-table-content .fa-times").toggle();
+            }
+
+            // if the post list is showing, change the icon.
+            if($(".post-list").is(":visible")){
+                $(".post-list").removeClass("common-bg");
+                $(".post-list").removeClass("margin-left-30");
+//                $(".post-list").toggle();
+//                $(".nav-table-content").next().children().each(function(index, dom){
+//                    $(dom).toggle();
+//                });
+            } else {
+                //显示目录默认结构
+                $("#tocButton").css("display", "");
+                $("#tocButton").click();
+            }
+
+        }
+    })
+</script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Facingsea
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script language="javascript">
+    window.onload = function() {
+        $("[title]").each(function() {
+            layerTip(this);
+        });
+        $("#scroll").each(function() {
+            layerTip(this);
+        });
+        $("#tocButton, #comments").each(function() {
+            layerTip(this);
+        });
+        $("#post-nav-button").each(function() {
+            layerTip(this);
+        });
+        $(".social").each(function() {
+            layerTip(this);
+        });
+
+        function layerTip(ele){
+            var $ele = $(ele);
+            var title = $ele.attr('title');
+            if (title == undefined || title == "") return;
+            var layerIndex = -1;
+            $ele.data('title', title).removeAttr('title').hover(
+                function() {
+                    $ele.attr('title', '');
+                    layerIndex = layer.tips($ele.data('title'), ele, {
+                        tips: 3
+                    });
+                }, function() {
+                    $ele.attr('title', title);
+                    if(layerIndex != -1){
+                        layer.close(layerIndex);
+                    }
+                });
+        }
+    };
+</script>
+
+
+
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77335186-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </div>
+</body>
+</html>
